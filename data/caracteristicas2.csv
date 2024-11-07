@@ -1,0 +1,121 @@
+Fecha,Portfolio,Caracteristica,Valor
+12/31/14,Indice,Duración,4.18
+12/31/15,Indice,Duración,3.89
+12/31/16,Indice,Duración,4.10
+12/31/17,Indice,Duración,4.37
+12/31/18,Indice,Duración,3.99
+12/31/19,Indice,Duración,3.56
+12/31/20,Indice,Duración,3.67
+12/31/21,Indice,Duración,3.63
+12/31/22,Indice,Duración,3.22
+12/31/23,Indice,Duración,3.00
+12/31/14,Indice,Convexidad,30.71
+12/31/15,Indice,Convexidad,25.57
+12/31/16,Indice,Convexidad,27.56
+12/31/17,Indice,Convexidad,30.96
+12/31/18,Indice,Convexidad,25.59
+12/31/19,Indice,Convexidad,21.92
+12/31/20,Indice,Convexidad,27.02
+12/31/21,Indice,Convexidad,24.06
+12/31/22,Indice,Convexidad,18.35
+12/31/23,Indice,Convexidad,16.78
+12/31/14,Indice,YTM,0.10
+12/31/15,Indice,YTM,0.10
+12/31/16,Indice,YTM,0.10
+12/31/17,Indice,YTM,0.10
+12/31/18,Indice,YTM,0.10
+12/31/19,Indice,YTM,0.09
+12/31/20,Indice,YTM,0.09
+12/31/21,Indice,YTM,0.06
+12/31/22,Indice,YTM,0.11
+12/31/23,Indice,YTM,0.10
+12/31/14,Indice,Current Yield,0.09
+12/31/15,Indice,Current Yield,0.09
+12/31/16,Indice,Current Yield,0.09
+12/31/17,Indice,Current Yield,0.09
+12/31/18,Indice,Current Yield,0.09
+12/31/19,Indice,Current Yield,0.09
+12/31/20,Indice,Current Yield,0.10
+12/31/21,Indice,Current Yield,0.11
+12/31/22,Indice,Current Yield,0.11
+12/31/23,Indice,Current Yield,0.10
+12/31/14,Indice,Sherman Ratio,0.03
+12/31/15,Indice,Sherman Ratio,0.02
+12/31/16,Indice,Sherman Ratio,0.03
+12/31/17,Indice,Sherman Ratio,0.02
+12/31/18,Indice,Sherman Ratio,0.02
+12/31/19,Indice,Sherman Ratio,0.02
+12/31/20,Indice,Sherman Ratio,0.02
+12/31/21,Indice,Sherman Ratio,0.02
+12/31/22,Indice,Sherman Ratio,0.03
+12/31/23,Indice,Sherman Ratio,0.03
+12/31/14,Indice,MaxDrawdown,-0.02
+12/31/15,Indice,MaxDrawdown,-0.01
+12/31/16,Indice,MaxDrawdown,0.00
+12/31/17,Indice,MaxDrawdown,-0.01
+12/31/18,Indice,MaxDrawdown,-0.02
+12/31/19,Indice,MaxDrawdown,-0.01
+12/31/20,Indice,MaxDrawdown,-0.02
+12/31/21,Indice,MaxDrawdown,-0.04
+12/31/22,Indice,MaxDrawdown,-0.14
+12/31/23,Indice,MaxDrawdown,-0.13
+12/31/14,ETF,Duración,4.29
+12/31/15,ETF,Duración,4.01
+12/31/16,ETF,Duración,4.28
+12/31/17,ETF,Duración,4.39
+12/31/18,ETF,Duración,4.10
+12/31/19,ETF,Duración,3.59
+12/31/20,ETF,Duración,3.77
+12/31/21,ETF,Duración,4.04
+12/31/22,ETF,Duración,3.25
+12/31/23,ETF,Duración,2.96
+12/31/14,ETF,Convexidad,30.71
+12/31/15,ETF,Convexidad,26.15
+12/31/16,ETF,Convexidad,28.98
+12/31/17,ETF,Convexidad,30.94
+12/31/18,ETF,Convexidad,26.69
+12/31/19,ETF,Convexidad,21.88
+12/31/20,ETF,Convexidad,27.82
+12/31/21,ETF,Convexidad,30.52
+12/31/22,ETF,Convexidad,18.40
+12/31/23,ETF,Convexidad,17.03
+12/31/14,ETF,YTM,0.11
+12/31/15,ETF,YTM,0.10
+12/31/16,ETF,YTM,0.10
+12/31/17,ETF,YTM,0.10
+12/31/18,ETF,YTM,0.10
+12/31/19,ETF,YTM,0.09
+12/31/20,ETF,YTM,0.09
+12/31/21,ETF,YTM,0.06
+12/31/22,ETF,YTM,0.11
+12/31/23,ETF,YTM,0.11
+12/31/14,ETF,Current Yield,0.11
+12/31/15,ETF,Current Yield,0.10
+12/31/16,ETF,Current Yield,0.10
+12/31/17,ETF,Current Yield,0.10
+12/31/18,ETF,Current Yield,0.10
+12/31/19,ETF,Current Yield,0.10
+12/31/20,ETF,Current Yield,0.10
+12/31/21,ETF,Current Yield,0.08
+12/31/22,ETF,Current Yield,0.09
+12/31/23,ETF,Current Yield,0.11
+12/31/14,ETF,Sherman Ratio,0.03
+12/31/15,ETF,Sherman Ratio,0.02
+12/31/16,ETF,Sherman Ratio,0.03
+12/31/17,ETF,Sherman Ratio,0.02
+12/31/18,ETF,Sherman Ratio,0.02
+12/31/19,ETF,Sherman Ratio,0.02
+12/31/20,ETF,Sherman Ratio,0.02
+12/31/21,ETF,Sherman Ratio,0.02
+12/31/22,ETF,Sherman Ratio,0.03
+12/31/23,ETF,Sherman Ratio,0.04
+12/31/14,ETF,MaxDrawdown,-0.0179670656095737
+12/31/15,ETF,MaxDrawdown,-0.00971862763418763
+12/31/16,ETF,MaxDrawdown,-0.00325624467036891
+12/31/17,ETF,MaxDrawdown,-0.0116595467322581
+12/31/18,ETF,MaxDrawdown,-0.0207444618528011
+12/31/19,ETF,MaxDrawdown,-0.0125650882513126
+12/31/20,ETF,MaxDrawdown,-0.0202716656695677
+12/31/21,ETF,MaxDrawdown,-0.0356261633189375
+12/31/22,ETF,MaxDrawdown,-0.141485346446051
+12/31/23,ETF,MaxDrawdown,-0.134861855060998

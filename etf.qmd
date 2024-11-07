@@ -1,0 +1,349 @@
+---
+title: Sensibilidad es lo único que necesitas
+subtitle: Simulación de un ETF replicante de un índice de deuda gubernamental en el mercado de renta fija dominicano
+authors: 
+  - Ian Contreras
+  - Héctor Castro
+  - Nicole Durán
+format:
+  beamer:
+    slide_level: 2
+    aspectratio: 169
+    theme: CambridgeUS 
+    colortheme: beaver
+    number-sections: false
+    section-titles: false
+abstract: |
+    El presente estudio propone la creación de un Fondo de Inversión Abierto Cotizado (ETF) que replique un índice financiero, compuesto por una canasta de instrumentos de deuda emitidos localmente por el Banco Central de la República Dominicana (BCRD) y el Ministerio de Hacienda (MH), denominados en pesos dominicanos. El índice se diseñará para reflejar con precisión el comportamiento a nivel agregado del universo de instrumentos de deuda pública doméstica disponibles en el mercado dominicano. Por su parte el ETF replicará la exposición y los rendimientos del índice a través de una tenencia representativa de su composición, utilizando estrategias de replicación eficientes que minimicen el error de seguimiento y optimicen los costos de gestión. En última instancia, el fondo proporcionará a los inversionistas una herramienta accesible y líquida para invertir en el mercado de deuda pública dominicana, contribuyendo así al desarrollo y profundización del mercado de valores dominicano.
+lang: es
+---
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
+import seaborn as sns
+```
+
+# Introducción
+
+## La problemática en el mercado de Renta Fija Dominicano
+
+- Crecimiento significativo del mercado de capitales, especialmente en renta fija.
+- Desafíos estructurales persistentes:
+  - Baja liquidez en el mercado secundario.
+  - Ausencia de mecanismos de formación de precios efectivos.
+  - Solo el 5% del volumen transado ocurre en la bolsa de valores; gran mayoría en mercado OTC, con menor liquidez y transparencia.
+- Impacto en inversionistas:
+  - Limitación en la toma de decisiones informadas.
+  - Barreras para inversionistas, especialmente extranjeros, debido a sensibilidad al riesgo idiosincrático.
+- La “Revolución de los ETFs”:
+  - Popularización de los ETFs como vehículos de inversión pasiva, mejorando liquidez y formación de precios.
+  - Permiten acceso diversificado en mercados con baja liquidez.
+  - En renta fija, facilitan acceso a bonos y permiten mayor transparencia y facilidad en la negociación.
+
+## Marco teórico de los ETFs
+
+### Qué son los ETFs
+
+- Instrumentos de inversión que brindan exposición a activos diversos.
+- Ventajas:
+  - Diversificación a bajo costo y accesibilidad para inversionistas minoristas e institucionales.
+  - Funcionan como acciones, permitiendo transacciones intradía.
+
+### Tipos de replicación: Física vs. Sintética
+
+- **Replicación física**:Propiedad directa de los activos subyacentes.
+- **Replicación sintética**: Uso de derivados para imitar el rendimiento del índice.
+
+### Tracking Error
+Mide la desviación entre el rendimiento del ETF y el índice de referencia.
+
+  - Replicación sintética tiende a el menor tracking error asociado a una restricción de costos. 
+
+## Impacto de los ETFs en otros mercados regionales
+
+:::: {.columns}
+
+::: {.column width="50%"} 
+![](img/stonks.png)
+:::
+
+::: {.column width="50%"} 
+
+### ETFs en Brasil, México y Colombia: 
+  - Mejora en eficiencia y liquidez
+  - Menor costo de inversión y mayor diversificación
+  
+### Impacto en renta fija:
+  - Menor volatilidad en spreads de crédito y tasas de interés
+  - Optimización de gestión de riesgos en mercados emergentes
+:::
+
+::::
+
+## Nuestra investigación
+
+### Objetivo
+Crear un ETF que replique un índice de deuda pública dominicana en pesos dominicanos. El índice reflejará el comportamiento agregado del mercado de deuda pública en RD.
+
+### Metodología
+Utilizar replicación sintética para replicar exposición y rendimientos del índice, minimizando el error de seguimiento y optimizando costos de gestión.
+
+### Beneficios esperados
+- Mayor accesibilidad para inversionistas y mejora en la liquidez del mercado de deuda pública.
+- Mayor rentabilidad neta comparado con las AFIS y con los CCI.
+
+# Metodología
+
+## Estructura
+
+- **Modelo de sensibilización de duración y convexidad (SD&C)**:
+  - Asegura una réplica precisa entre el ETF y el índice.
+  - Se basa en caracterizar el índice con factores de riesgo.
+
+![](img/graph.png)
+
+## Construcción del índice de referencia
+:::: {.columns}
+
+::: {.column width="65%"} 
+
+| Reglas                | Índice de referencia Gobix                          |
+|-----------------------|----------------------------------------------------|
+| Tipo de Instrumento   | Bonos bullet tasa fija no amortizables             |
+| Moneda                | Deuda denominada en pesos                          |
+| Emisor                | MH y BCRD      |
+| Días desde emisión    | Mínimo 31 días                                     |
+| Días a vencimiento    | Mínimo 180 días                                    |
+| Mercado               | Local                                             |
+| Fuente de precios     | Quantech SRL (Nelson & Siegel)                     |
+| Reinversión de flujos | En el mismo índice en la fecha de rebalanceo       |
+:::
+
+::: {.column width="35%"} 
+
+### Fórmulas clave
+
+- **Índice de Retorno Total (IRT)**: 
+$$
+IRT_t = IRT_{t-1} \cdot (1 + RTP_t)
+$$
+
+- **Retorno Total Ponderado (RTP)**:
+
+$$
+RTP_t = \sum_{i=1}^n RTI_{i,t} \cdot W_{i,t}
+$$
+
+:::
+
+::::
+
+## Modelo de Factores de Riesgo para la Renta Fija
+
+:::: {.rows}
+
+::: {.row width="50%"} 
+**Factores de riesgo**: Elementos que afectan el valor de los bonos (ej. tasas de interés).
+**Riesgo de mercado**: Basado en la sensibilidad del bono a fluctuaciones de tasas.
+
+### Descomposición del Riesgo
+
+- Identificación a través de la **curva de rendimiento**.
+- Diferentes flujos de cupón tienen exposición variable al riesgo de tasas.
+:::
+
+::: {.row width="50%"} 
+### Sensibilidad al Riesgo de Tasas de Interés
+
+:::: {.columns}
+
+::: {.column width="65%"} 
+**Duración Modificada** ($D$): Mide el cambio relativo en precio ante cambios en tasas.
+$$
+D = -\frac{1}{B} \frac{\partial B}{\partial y}
+$$
+
+:::
+
+::: {.column width="35%"} 
+**Convexidad** ($C$): Mide la curvatura en la relación entre precio y tasa.
+$$
+C = \frac{1}{B} \frac{\partial^2 B}{\partial y^2}
+$$
+
+:::
+::::
+:::
+::::
+
+
+## Clúster jerárquico para caracterizar los factores de riesgo
+
+:::: {.columns}
+
+::: {.column width="65%"} 
+![](img/dendograma.png)
+:::
+
+::: {.column width="35%"} 
+- **Objetivo**: Reducir la dimensionalidad del universo de factores de riesgo en renta fija.
+
+- **Ventajas**:
+  - Utilizamos la **correlación** entre variables como medida de distancia. Métrica simple.
+  - NO requiere predefinir un número de grupos.
+
+:::
+
+::::
+
+## Inmunización del Ratio Duración-Convexidad
+
+- **Enfoque**: Crea subportafolios que igualan la duración y convexidad del índice en cada factor de riesgo.
+
+- **Ventajas del modelo SD&C**:
+  1. Menor costo computacional comparado con el modelo MAD-OPT.
+  2. Garantiza replicación precisa con condiciones:
+     - Cada subportafolio contiene al menos 3 instrumentos.
+     - Instrumentos de un mismo factor deben tener distintos ratios duración-convexidad.
+
+- **Restricciones del mercado de RD**:
+  - Operaciones long-only debido a limitaciones de liquidez.
+  - Condiciones para asegurar posiciones positivas y fully-invested.
+
+## Fórmula de Inmunización de Duración-Convexidad
+$$
+\min_{\beta} \left( 1' (\mu_X \ast \beta - \mu_{L, k}) \right), \text{ donde } 1' \rightarrow \beta = \beta_1, \dots, \beta_K, \text{ y } \beta_k = V_k^{-1} I_k \text{ para cada } k \in 1, 2, \dots, K
+$$
+
+Donde:
+$$
+\begin{bmatrix}
+D_{1,k} & D_{2,k} & D_{3,k} \\
+C_{1,k} & C_{2,k} & C_{3,k} \\
+1 & 1 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+\beta_2 \\
+\beta_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+D_s(I, k) \\
+C_s(I, k) \\
+1 \\
+\end{bmatrix}
+\rightarrow \beta_k = V_k^{-1} I_k
+$$
+
+- **Condición de solución**:$\beta_1, \beta_2, \beta_3 > 0 \text{ si } \frac{D_1}{C_1} \neq \frac{D_2}{C_2} \neq \frac{D_3}{C_3}$
+
+- **Condición de positividad**:$B_1, \dots, B_i \text{ donde } i \subseteq n$
+
+# Resultados
+
+## Simulación del ETF
+![](img/simulacion.png)
+
+## Histórico del Tracking Error
+![](img/tracking_error.png)
+
+## Distribución del Tracking Error
+![](img/track_error_dist.png)
+
+## Reducción dimensionalidad
+![](img/dimension.png)
+
+## Evolución características
+
+```{python}
+df = pd.read_csv("data/caracteristicas2.csv")
+df["Fecha"] = pd.to_datetime(df["Fecha"], format="%m/%d/%y")
+
+g = sns.FacetGrid(
+    df,
+    col="Caracteristica",
+    hue="Portfolio",
+    height=5,
+    aspect=1.5,
+    col_wrap=3,
+    sharey=False,
+)
+g.map(sns.lineplot, "Fecha", "Valor").add_legend()
+
+# Formatting
+g.set_axis_labels("Fecha", "Valor")
+g.set_titles("{col_name}", fontweight="bold")
+plt.xticks(rotation=45)
+
+# Show the plot
+plt.show()
+```
+
+## ETF sintético vs los fondos de pensiones
+
+```{python}
+df = pd.read_csv("data/index_vs_afp.csv")
+df["FECHA"] = pd.to_datetime(df["FECHA"], format="%m/%d/%y")
+
+df["INDEX"] = df["INDEX"].str.replace("%", "").astype(float) / 100
+df["CCI0"] = df["CCI"].str.replace("%", "").astype(float) / 100
+
+plt.figure(figsize=(10, 6))
+plt.plot(df["FECHA"], df["INDEX"], label="INDEX")
+plt.plot(df["FECHA"], df["CCI0"], label="CCI0")
+
+plt.title("Time Series of INDEX vs CCI")
+plt.xlabel("Date")
+plt.ylabel("Percentage")
+plt.legend()
+plt.grid(True)
+plt.gca().yaxis.set_major_formatter(
+    PercentFormatter(1)
+)
+
+plt.show()
+plt.show()
+```
+
+## ETF sintético vs los fondos de inversión
+
+```{python}
+df = pd.read_csv("data/rentabilidad_2023.csv")
+df["Rentabilidad"] = df["Rentabilidad"].str.replace("%", "").astype(float) / 100
+df = df.sort_values("Rentabilidad", ascending=False)
+plt.figure(figsize=(10, 6))
+plt.barh(df["Fondo"], df["Rentabilidad"], color="skyblue")
+plt.xlabel("Rentabilidad (%)")
+plt.title("Ranking de Fondos por Rentabilidad (2023)")
+plt.gca().xaxis.set_major_formatter(
+    plt.matplotlib.ticker.PercentFormatter(1)
+)  
+
+plt.gca().invert_yaxis()
+
+plt.show()
+```
+
+# Conclusión
+
+## Implicaciones, Limitaciones y Conclusiones
+
+### Implicaciones
+- ETF propuesto superó el rendimiento ponderado de fondos de pensiones y SAFI.
+- Muestra el potencial de ingeniería financiera para mejorar la gestión de fondos de pensiones, con impacto a largo plazo.
+
+### Limitaciones
+- Dependencia de baja liquidez limita el acceso a ciertos instrumentos.
+- Metodología específica para el mercado local; requiere ajustes en otros contextos.
+
+### Conclusiones
+- Validada la replicación de un índice de deuda con instrumentos limitados en mercados emergentes.
+- Proporciona un marco adaptable para ETFs en mercados similares, apoyando el desarrollo del mercado local.
+
+## Gracias por su atención
+
+Aquí les dejo un código qr del repositorio Git de esta presentación:
+
+![](img/qr.png){fig-align="center"}
